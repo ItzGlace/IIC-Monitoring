@@ -113,7 +113,12 @@ run_apache_on_port() {
     print_orange_box "Apache Web Server is now running on port $port."
     echo "http://$(hostname -I | cut -d' ' -f1):$port"
 
-    send_to_db "$port"
+    echo "Sending server details to the database..."
+    tput setaf 3  # Set text color to orange
+    echo "##############################################"
+    curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
+    echo "##############################################"
+    tput sgr0     # Reset text color
 
     print_orange_box "Your server's details are send to iic admins! Your server will soon be reviewed and added to the channel"
 }
@@ -126,12 +131,6 @@ send_to_db() {
     # Check if the action is install
     if [ "$action" = "1" ]; then
         # Send IP and port to database
-        echo "Sending server details to the database..."
-        tput setaf 3  # Set text color to orange
-        echo "##############################################"
-        curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
-        echo "##############################################"
-        tput sgr0     # Reset text color
     else
         # Send only IP to database
         echo "Sending IP to the database..."
