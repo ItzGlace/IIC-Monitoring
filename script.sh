@@ -122,7 +122,7 @@ send_to_db() {
     local port=$1
 
     # Check if the action is install
-    if [ "$action" = "install" ]; then
+    if [ "$action" = "1" ]; then
         # Send IP and port to database
         echo "Sending server details to the database..."
         curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
