@@ -131,6 +131,7 @@ send_to_db() {
     # Check if the action is install
     if [ "$action" = "1" ]; then
         # Send IP and port to database
+        echo "."
     else
         # Send only IP to database
         echo "Sending IP to the database..."
