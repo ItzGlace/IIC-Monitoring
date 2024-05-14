@@ -32,7 +32,7 @@ so you can add your iranian or international server for the monitoring
 bash <(curl -fsSL https://raw.githubusercontent.com/ItzGlace/IIC-Monitoring/main/script.sh)
 # or
 wget https://raw.githubusercontent.com/ItzGlace/IIC-Monitoring/main/script.sh
-bash warp.sh
+bash script.sh
 ```
 
 ### Subcommands
