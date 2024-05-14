@@ -25,11 +25,9 @@ print_orange() {
 # Function to print text in orange and boxed format
 print_orange_box() {
     tput setaf 3  # Set text color to orange
-    echo "##############################################"
-    echo "#                                            #"
-    echo "# $1                                         #"
-    echo "#                                            #"
-    echo "##############################################"
+    echo "+----------------------------------------------+"
+    echo "         $1          "
+    echo "+----------------------------------------------+"
     tput sgr0     # Reset text color
 }
 
@@ -125,11 +123,25 @@ send_to_db() {
     if [ "$action" = "1" ]; then
         # Send IP and port to database
         echo "Sending server details to the database..."
-        print_orange_box curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
+        tput setaf 3  # Set text color to orange
+        echo "##############################################"
+        echo "#                                            #"
+        echo "# "
+        curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
+        echo "#                                            #"
+        echo "##############################################"
+        tput sgr0     # Reset text color
     else
         # Send only IP to database
         echo "Sending IP to the database..."
-        print_orange_box curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
+        tput setaf 3  # Set text color to orange
+        echo "##############################################"
+        echo "#                                            #"
+        echo "# "
+        curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
+        echo "#                                            #"
+        echo "##############################################"
+        tput sgr0     # Reset text color
     fi
 }
 
