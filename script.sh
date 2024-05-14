@@ -114,6 +114,8 @@ run_apache_on_port() {
     echo "http://$(hostname -I | cut -d' ' -f1):$port"
 
     send_to_db "$port"
+
+    print_orange_box "Your server's details are send to iic admins! Your server will soon be reviewed and added to the channel"
 }
 
 # Function to send server details to the database
@@ -127,10 +129,7 @@ send_to_db() {
         echo "Sending server details to the database..."
         tput setaf 3  # Set text color to orange
         echo "##############################################"
-        echo "#                                            #"
-        echo "# "
         curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
-        echo "#                                            #"
         echo "##############################################"
         tput sgr0     # Reset text color
     else
@@ -138,10 +137,7 @@ send_to_db() {
         echo "Sending IP to the database..."
         tput setaf 3  # Set text color to orange
         echo "##############################################"
-        echo "#                                            #"
-        echo "# "
         curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
-        echo "#                                            #"
         echo "##############################################"
         tput sgr0     # Reset text color
     fi
