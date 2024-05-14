@@ -19,6 +19,13 @@ Supported distributions:
 - Arch Linux
 - Other similar distributions
 
+## How It Works
+
+every minute we send an http request to your server and store the response time on our database
+then every hour our service will read this data and create a chart and publish it on [@iran_internet_collision](https://t.me/iran_internet_collision)
+these requests are send from ArvanCloud(the only isp with lowest internet problems in iran)
+so you can add your iranian or international server for the monitoring
+
 ## Usage
 
 ```bash
