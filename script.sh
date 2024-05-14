@@ -125,11 +125,11 @@ send_to_db() {
     if [ "$action" = "install" ]; then
         # Send IP and port to database
         echo "Sending server details to the database..."
-        curl -X GET "http://anubisprwksy.com/iic/add?ip=$ip&port=$port"
+        curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
     else
         # Send only IP to database
         echo "Sending IP to the database..."
-        curl -X GET "http://anubisprwksy.com/iic/remove?ip=$ip"
+        curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
     fi
 }
 
