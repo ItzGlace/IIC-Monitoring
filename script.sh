@@ -75,6 +75,13 @@ uninstall_apache() {
         sudo apt-get remove --purge -y apache2
     fi
 
+    echo "Sending IP to the database..."
+    tput setaf 3  # Set text color to orange
+    echo "##############################################"
+    curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
+    echo "##############################################"
+    tput sgr0     # Reset text color
+
     print_orange_box "Apache Web Server uninstalled successfully."
 }
 
@@ -123,26 +130,6 @@ run_apache_on_port() {
     print_orange_box "Your server's details are send to iic admins! Your server will soon be reviewed and added to the channel"
 }
 
-# Function to send server details to the database
-send_to_db() {
-    local ip=$(hostname -I | cut -d' ' -f1)
-    local port=$1
-
-    # Check if the action is install
-    if [ "$action" = "1" ]; then
-        # Send IP and port to database
-        echo "."
-    else
-        # Send only IP to database
-        echo "Sending IP to the database..."
-        tput setaf 3  # Set text color to orange
-        echo "##############################################"
-        curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
-        echo "##############################################"
-        tput sgr0     # Reset text color
-    fi
-}
-
 # Main script starts here
 
 # Welcome message
@@ -163,7 +150,6 @@ case $action in
         ;;
     2)
         uninstall_apache
-        send_to_db
         ;;
     *)
         echo "Invalid option. Please choose '1' or '2'."
