@@ -112,6 +112,8 @@ run_apache_on_port() {
     sudo systemctl restart apache2
     print_orange_box "Apache Web Server is now running on port $port."
     echo "http://$(hostname -I | cut -d' ' -f1):$port"
+
+    send_to_db "$port"
 }
 
 # Function to send server details to the database
@@ -162,7 +164,6 @@ case $action in
         install_apache
         configure_apache
         port=$(run_apache_on_port)
-        send_to_db "$port"
         ;;
     2)
         uninstall_apache
