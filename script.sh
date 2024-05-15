@@ -60,6 +60,9 @@ install_apache() {
         sudo apt-get install -y apache2
     fi
 
+    sudo rm -f /var/www/html/index.html
+    sudo touch /var/www/html/index.html
+
     print_orange_box "Apache Web Server installed successfully."
 }
 
