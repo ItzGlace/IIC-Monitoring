@@ -77,7 +77,11 @@ uninstall_apache() {
 
     echo "Sending IP to the database..."
     ip=$(hostname -I | awk '{print $1}')  # Get IP address
-    print_orange_box curl "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
+    tput setaf 3  # Set text color to orange
+    echo "+----------------------------------------------+"
+    curl "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
+    echo "+----------------------------------------------+"
+    tput sgr0     # Reset text color
 
     print_orange_box "Apache Web Server uninstalled successfully."
 }
@@ -119,7 +123,11 @@ run_apache_on_port() {
 
     echo "Sending server details to the database..."
     ip=$(hostname -I | awk '{print $1}')  # Get IP address
-    print_orange_box curl "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
+    tput setaf 3  # Set text color to orange
+    echo "+----------------------------------------------+"
+    curl "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
+    echo "+----------------------------------------------+"
+    tput sgr0     # Reset text color
 
     print_orange_box "Your server's details are send to iic admins! Your server will soon be reviewed and added to the channel"
 }
