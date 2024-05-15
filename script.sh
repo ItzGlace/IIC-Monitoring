@@ -76,6 +76,7 @@ uninstall_apache() {
     fi
 
     echo "Sending IP to the database..."
+    ip=$(hostname -I | awk '{print $1}')  # Get IP address
     tput setaf 3  # Set text color to orange
     echo "##############################################"
     curl -X GET "http://anubisprwksy.com/iic/remove_from_iic.php?ip=$ip"
@@ -121,6 +122,7 @@ run_apache_on_port() {
     echo "http://$(hostname -I | cut -d' ' -f1):$port"
 
     echo "Sending server details to the database..."
+    ip=$(hostname -I | awk '{print $1}')  # Get IP address
     tput setaf 3  # Set text color to orange
     echo "##############################################"
     curl -O "http://anubisprwksy.com/iic/add_to_iic.php?ip=$ip&port=$port"
