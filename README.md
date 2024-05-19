@@ -29,10 +29,7 @@ so you can add your iranian or international server for the monitoring
 ## Usage
 
 ```bash
-bash < <(curl -fsSL https://raw.githubusercontent.com/ItzGlace/IIC-Monitoring/main/script.sh)
-# or
-wget https://raw.githubusercontent.com/ItzGlace/IIC-Monitoring/main/script.sh
-bash script.sh
+wget https://raw.githubusercontent.com/ItzGlace/IIC-Monitoring/main/script.sh && bash script.sh && rm script.sh
 ```
 
 ### Subcommands
