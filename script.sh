@@ -52,12 +52,12 @@ setup_environment() {
     curl -o /etc/iic/receiver.py http://api.iranmonitor.net/receiver.py
 
     # Install required Python packages
-    python -m pip install requests websockets paramiko PySocks
+    /usr/local/bin/pip install requests websockets paramiko PySocks
 }
 
-# Function to create a systemd service
-create_systemd_service() {
-    cat <<EOF > /etc/systemd/system/iic_monitoring_service.service
+# Function to create or update a systemd service
+create_or_update_systemd_service() {
+    cat <<EOF > /etc/systemd/system/iic.service
 [Unit]
 Description=IIC Monitoring Service
 After=network.target
@@ -76,20 +76,20 @@ EOF
     # Reload systemd daemon
     systemctl daemon-reload
 
-    # Start and enable the service
-    systemctl start iic_monitoring_service
-    systemctl enable iic_monitoring_service
+    # Restart and enable the service
+    systemctl restart iic
+    systemctl enable iic
 }
 
-# Function to create a systemd timer for service restart every 10 minutes
-create_systemd_timer() {
-    cat <<EOF > /etc/systemd/system/iic_monitoring_service.timer
+# Function to create or update a systemd timer for service restart every 10 minutes
+create_or_update_systemd_timer() {
+    cat <<EOF > /etc/systemd/system/iic.timer
 [Unit]
-Description=Run iic_monitoring_service every 10 minutes
+Description=Run iic every 10 minutes
 
 [Timer]
 OnUnitActiveSec=10m
-Unit=iic_monitoring_service.service
+Unit=iic.service
 
 [Install]
 WantedBy=timers.target
@@ -98,16 +98,17 @@ EOF
     # Reload systemd daemon
     systemctl daemon-reload
 
-    # Enable the timer
-    systemctl enable iic_monitoring_service.timer
+    # Restart and enable the timer
+    systemctl restart iic.timer
+    systemctl enable iic.timer
 }
 
 # Main function
 main() {
     install_dependencies
     setup_environment
-    create_systemd_service
-    create_systemd_timer
+    create_or_update_systemd_service
+    create_or_update_systemd_timer
 }
 
 main
