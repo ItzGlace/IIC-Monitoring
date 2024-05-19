@@ -52,7 +52,7 @@ setup_environment() {
     curl -o /etc/iic/receiver.py http://api.iranmonitor.net/receiver.py
 
     # Install required Python packages
-    /usr/local/bin/pip install requests websockets paramiko PySocks
+    pip3 install requests websockets paramiko PySocks
 }
 
 # Function to create or update a systemd service
