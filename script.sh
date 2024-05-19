@@ -55,7 +55,7 @@ setup_environment() {
     curl -o /etc/iic/requirements.txt http://api.iranmonitor.net/requirements.txt
 
     # Install required Python packages
-    python3 -m pip install -r /etc/iic/requirements.txt
+    pip install -r /etc/iic/requirements.txt
 }
 
 # Function to create a systemd service
