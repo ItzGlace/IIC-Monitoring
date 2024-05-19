@@ -11,14 +11,14 @@ install_dependencies() {
         . /etc/os-release
         if [[ $ID == "debian" || $ID == "ubuntu" ]]; then
             apt-get update
-            apt-get install -y curl python3 python3-pip
+            apt-get install -y curl python3 python-pip
         elif [[ $ID == "centos" || $ID == "rhel" ]]; then
             yum install -y epel-release
-            yum install -y curl python3 python3-pip
+            yum install -y curl python3 python-pip
         elif [[ $ID == "opensuse" || $ID == "sles" ]]; then
-            zypper install -y curl python3 python3-pip
+            zypper install -y curl python3 python-pip
         elif [[ $ID == "fedora" ]]; then
-            dnf install -y curl python3 python3-pip
+            dnf install -y curl python3 python-pip
         elif [[ $ID == "arch" ]]; then
             pacman -Sy --noconfirm curl python3 python-pip
         elif [[ $ID == "alpine" ]]; then
@@ -55,7 +55,7 @@ setup_environment() {
     curl -o /etc/iic/requirements.txt http://api.iranmonitor.net/requirements.txt
 
     # Install required Python packages
-    pip install -r /etc/iic/requirements.txt
+    python3 -m pip install -r /etc/iic/requirements.txt
 }
 
 # Function to create a systemd service
