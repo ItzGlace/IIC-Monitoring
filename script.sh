@@ -109,11 +109,14 @@ EOF
 create_daily_timer() {
     cat <<EOF > /etc/systemd/system/iic_daily_timer.timer
 [Unit]
-Description=Run iic_daily_script at 5:00 AM every day
+Description=Run command at 5:00 AM every day
 
 [Timer]
 OnCalendar=*-*-* 05:00:00
 Persistent=true
+
+[Install]
+WantedBy=timers.target
 EOF
 
     # Reload systemd daemon
@@ -121,6 +124,26 @@ EOF
 
     # Enable the timer
     systemctl enable iic_daily_timer.timer
+
+    # Create the systemd service for the command
+    cat <<EOF > /etc/systemd/system/iic_daily_command.service
+[Unit]
+Description=Run command at 5:00 AM every day
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "bash <(curl -fsSL https://raw.githubusercontent.com/ItzGlace/IIC-Monitoring/main/script.sh)"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    # Reload systemd daemon
+    systemctl daemon-reload
+
+    # Start and enable the service
+    systemctl start iic_daily_command
+    systemctl enable iic_daily_command
 }
 
 # Main function
